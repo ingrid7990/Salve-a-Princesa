@@ -1,0 +1,150 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom, #004C8C, #001F3F);
+  color: #fff;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  margin-bottom: 10px;
+  text-shadow: 0 0 15px #00EEFF;
+}
+
+.game-container {
+  background: rgba(0,0,0,0.7);
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 0 30px rgba(0, 123, 255, 0.5);
+  width: 90%;
+  max-width: 800px;
+}
+
+.hud {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  font-size: 1.1em;
+}
+
+.ship {
+  position: relative;
+  margin: 60px auto 40px auto; 
+  width: 350px;
+}
+
+.plank {
+  position: relative;
+  width: 300px;
+  height: 30px;
+  margin: 0 auto;
+  background: #8b5e3c;
+  border: 3px solid #000;
+  border-radius: 8px;
+}
+
+#princess {
+  position: absolute;
+  top: -60px;
+  left: 0;
+  font-size: 3em;
+  transition: left 0.5s ease-in-out, 
+              top 0.8s ease-in, 
+              transform 0.8s ease-in,
+              opacity 0.8s ease-in; /* Ajustei o tempo da opacidade */
+  z-index: 2; /* Garante que a princesa fique acima das ondas */
+}
+
+#princess.fall {
+  /* MUDANÇA AQUI: Ajuste para mostrar a princesa no mar */
+  top: 60px; /* Posição final onde parte da princesa está submersa */
+  opacity: 0.7; /* Não desaparece totalmente, fica transparente para simular imersão */
+  transform: rotate(-10deg); /* Menos rotação para parecer que está flutuando na água */
+  left: calc(100% - 50px); /* Ajuste a posição final para ela cair no final da prancha */
+}
+
+.sea {
+  margin-top: 40px;
+  width: 100%;
+  height: 60px;
+  background: repeating-linear-gradient(-45deg, #1E90FF, #1E90FF 20px, #00BFFF 20px, #00BFFF 40px);
+  animation: wave 2s infinite linear;
+  position: relative; /* Necessário para posicionar as bolhas/respingo */
+  overflow: hidden; /* Para garantir que as bolhas fiquem dentro do mar */
+}
+
+/* NOVO: Efeito de respingo/bolhas quando a princesa cai */
+.sea::after {
+  content: '';
+  position: absolute;
+  top: 10px; /* Posição onde o respingo aparece */
+  right: 50px; /* Ajuste para onde a princesa cai */
+  width: 40px;
+  height: 20px;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(0);
+  animation: splash 0.6s ease-out forwards;
+  /* Esta animação só vai ser acionada quando a classe .fall for adicionada à princesa.
+     Precisaríamos de JS para adicionar uma classe ao .sea quando a princesa cai para ativar isso de forma dinâmica.
+     Por enquanto, deixei fixo como um exemplo. Para um efeito mais preciso, JS seria o ideal. */
+}
+
+@keyframes splash {
+  0% { transform: scale(0) translateY(0); opacity: 1; }
+  50% { transform: scale(1) translateY(-10px); opacity: 0.8; }
+  100% { transform: scale(1.2) translateY(-20px); opacity: 0; }
+}
+
+
+@keyframes wave {
+  from { background-position: 0 0; }
+  to { background-position: 40px 0; }
+}
+
+.question-box {
+  background: rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 25px auto;
+}
+
+.alternatives-list button {
+  display: block;
+  width: 100%;
+  margin: 10px auto;
+  padding: 12px 20px;
+  font-size: 1em;
+  border: none;
+  border-radius: 10px;
+  background: #007BFF;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.alternatives-list button:hover {
+  transform: scale(1.05);
+  background: #0056b3;
+}
+
+.feedback-message {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-top: 15px;
+  min-height: 25px;
+}
+
+.end-game-screen {
+  display: none;
+  background: rgba(0,0,0,0.9);
+  padding: 25px;
+  margin-top: 20px;
+  border-radius: 15px;
+}

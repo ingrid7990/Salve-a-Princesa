@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Salvar a Princesa - Agenda 2030</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="game-container">
+    <h1>🏴‍☠️ Salvar a Princesa</h1>
+
+    <div class="hud">
+      <div id="lives">❤️❤️❤️</div>
+      <div>⭐ Pontos: <span id="score">0</span></div>
+      <div>📖 Fase: <span id="level">1</span></div>
+      <div>⏳ Tempo: <span id="timer">30</span>s</div>
+    </div>
+
+    <div class="ship">
+      <div class="plank">
+        <div id="princess">👸</div>
+      </div>
+      <div class="sea"></div>
+    </div>
+
+    <div id="question-container" class="question-box">
+      <h2 id="question"></h2>
+      <div id="answers" class="alternatives-list"></div>
+    </div>
+
+    <div id="status" class="feedback-message"></div>
+
+    <div id="end-game" class="end-game-screen">
+      <h2 id="end-message"></h2>
+      <p id="medal"></p>
+      <button onclick="restartGame()">🔄 Jogar Novamente</button>
+    </div>
+  </div>
+
+  <script src="questions.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
